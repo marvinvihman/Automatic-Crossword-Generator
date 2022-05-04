@@ -2,12 +2,12 @@ body {
   background: -webkit-gradient(linear, left top, left bottom, from(#6b8fef), to(#83eaea)) fixed;
 }
 h1 {
-  color: blue;
+  color: #01011c;
   font-family: verdana;
   font-size: 300%;
 }
 p  {
-  color: red;
+  color: #340d0d;
   font-family: courier;
   font-size: 160%;
 }
@@ -40,9 +40,7 @@ p  {
   margin-top: 50px; /* Add a top margin to avoid content overlay */
 }
 
-.crossword {
 
-}
 
 .button {
   border: none;
@@ -65,4 +63,14 @@ p  {
 .button1:hover {
   background-color: #4CAF50;
   color: white;
+}
+/*Needed code for the crossword*/
+.crossword {
+
+}
+.input:valid {
+  border: 2px solid green;
+}
+.input:invalid {
+  border: 2px solid red;
 }

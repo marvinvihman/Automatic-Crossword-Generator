@@ -13,9 +13,18 @@
         <a href="{{ url_for('ristsõna') }}">Ristsõna</a>
         <a href="{{ url_for('leheküljest') }}">Leheküljest</a>
     </div>
+
     <div class="main">
         <h1>Kuskile tuleb ristõna</h1>
         <p>Alustame siis !</p>
+    </div>
+
+    <div class="crossword main">
+        {% for rida in laud %}
+            {{ rida }}
+            <br>
+        {% endfor %}
+
     </div>
 
 </body>

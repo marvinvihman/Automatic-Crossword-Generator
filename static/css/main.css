@@ -43,8 +43,8 @@ p  {
 
 .grid-container {
     display: grid;
-    grid-template-columns: 200px 200px 20%;
-    grid-gap: 1px;
+    grid-template-columns: 150px 150px 10%;
+    grid-gap: 20px;
 }
 
 .button {
@@ -75,11 +75,17 @@ p  {
 }
 .input_label {
   background-color : #000000;
-  size: 5px;
+  height: 30px;
+  width: 30px;
+  vertical-align: top;
+  text-align: left;
+  font-size: 10px;
+
 }
-.input:valid {
-  border: 2px solid green;
-}
-.input:invalid {
-  border: 2px solid red;
+.input {
+  height: 30px;
+  width: 30px;
+  vertical-align: top;
+  text-align: left;
+  font-size: 10px;
 }

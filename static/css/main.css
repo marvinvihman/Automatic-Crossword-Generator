@@ -38,7 +38,7 @@ p  {
 /* Main content */
 .main {
   margin-top: 50px; /* Add a top margin to avoid content overlay */
-  padding-left: 45%;
+  text-align: center;
 }
 
 .grid-container {
@@ -46,8 +46,6 @@ p  {
     grid-template-columns: 200px 200px 20%;
     grid-gap: 1px;
 }
-
-
 
 .button {
   border: none;

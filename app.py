@@ -1,6 +1,5 @@
-from flask import Flask, render_template, url_for, Table, Col
+from flask import Flask, render_template, url_for
 import ristsõna as rs
-
 
 app = Flask(__name__)
 
@@ -17,9 +16,10 @@ def leheküljest():
 
 @app.route("/ristsõna")
 def ristsõna():
-
-    return render_template('ristsõna.html', sõnastik=rs.lahendus, laud=rs.LAUD)
+    sonastik, laud = rs.toota()
+    return render_template('ristsõna.html', sõnastik=sonastik, laud=laud)
 
 
 if __name__ == '__main__':
-    app.run()
+    app.config["TEMPLATES_AUTO_RELOAD"] = True
+    app.run(extra_files=rs)

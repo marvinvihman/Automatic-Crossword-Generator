@@ -3,21 +3,41 @@ import random
 import re
 from estnltk.wordnet import Wordnet
 
-wd = Wordnet()
 
-LAUA_SUURUSED = [15, 21, 23, 25]
-SUURUS = 0
-LAUD = [['.' for i in range(LAUA_SUURUSED[SUURUS])] for j in range(LAUA_SUURUSED[SUURUS])]
+def toota():
+    wd = Wordnet()
 
-"""
-Algoritm:
-    1. Aseta sõna lauale horisontaalselt
-    2. Kui mahub, aseta teine sõna samuti horisontaalselt
-    3. Võta 0 rea ja 2n veeru algustäht, otsi hulgast sama algustähega, list.sample() ning aseta vertikaalselt.
-    4. Korda 2. aga vertikaalselt
-    5. 
-      
-"""
+    LAUA_SUURUSED = [15, 21, 23, 25]
+    SUURUS = 0
+    LAUD = [['.' for i in range(LAUA_SUURUSED[SUURUS])] for j in range(LAUA_SUURUSED[SUURUS])]
+
+    andmestikuEeltöötleja = ae.AndmestikuEeltöötleja("https://www.cl.ut.ee/ressursid/sagedused/tabel1.txt")
+    sagedus_sõnastik = andmestikuEeltöötleja.looDataFrame()
+    andmestikuEeltöötleja.sorteeriDataFrame(sagedus_sõnastik)
+
+    sagedus_sõnastik = sagedus_sõnastik.dropna()
+    sonad = sagedus_sõnastik['sõna'].tolist()
+
+    lahend = dict()
+    asetaLauale(sonad, LAUD, lahend, wd)
+
+    for i in LAUD:
+        print(i)
+
+    print(lahend)
+
+    for i in range(len(LAUD)):
+        for j in range(len(LAUD)):
+            if LAUD[i][j] != '.':
+                LAUD[i][j] = ''
+
+    for value in lahend.values():
+        if LAUD[value[0][0]][value[0][1]] == '':
+            LAUD[value[0][0]][value[0][1]] += str(value[2])
+        else:
+            LAUD[value[0][0]][value[0][1]] += ', ' + str(value[2])
+
+    return lahend, LAUD
 
 
 def leiaValikud(reg, sonastik):
@@ -35,7 +55,7 @@ def leiaValikud(reg, sonastik):
             cutoff = i
             break
 
-    #print(r"^(" + reg[:cutoff] + "*?)")
+    # print(r"^(" + reg[:cutoff] + "*?)")
     if reg[:cutoff] != '':
         valikud = []
         while not valikud:
@@ -43,7 +63,7 @@ def leiaValikud(reg, sonastik):
 
                 if re.search(r"^" + reg[:cutoff - cutoff_lisa] + "*?", val):
                     valikud.append(val)
-            #print(reg[:cutoff - cutoff_lisa])
+            # print(reg[:cutoff - cutoff_lisa])
             cutoff_lisa += 1
             if len(reg) == cutoff_lisa:
                 uuesti = True
@@ -53,7 +73,7 @@ def leiaValikud(reg, sonastik):
 
                     if re.search(r"^" + reg[cutoff_lisa:cutoff] + "*?", val):
                         valikud.append(val)
-                #print(reg[:cutoff - cutoff_lisa])
+                # print(reg[:cutoff - cutoff_lisa])
                 cutoff_lisa += 1
 
         if len(reg) < len(min(valikud)):
@@ -62,22 +82,22 @@ def leiaValikud(reg, sonastik):
     return []
 
 
-def asetaLauale(sonastik, laud, asetatud):
+def asetaLauale(sonastik, laud, asetatud, wd):
     ridaIdx = 0
     veergIdx = 0
     loendur = 0
 
     # Asetab lauale horisontaalselt
     while loendur <= 20:
-        #print(loendur)
-        #print(ridaIdx, veergIdx)
+        # print(loendur)
+        # print(ridaIdx, veergIdx)
         if ridaIdx >= len(laud):
             if loendur == 16:
                 break
             else:
                 ridaIdx = loendur
         rida = ''.join(laud[ridaIdx][veergIdx:])
-        #print(rida)
+        # print(rida)
         while len(rida) > 2:
             if ridaIdx <= len(laud) and veergIdx <= len(laud):
                 rida = ''.join(laud[ridaIdx][veergIdx:])
@@ -89,7 +109,8 @@ def asetaLauale(sonastik, laud, asetatud):
                 break
 
             sona = random.choice(valikud)
-            while sona in asetatud and len(sona) <= len(rida):
+
+            while sona in asetatud and len(sona) >= len(rida):
                 sona = random.choice(valikud)
             if len(sona) <= len(rida):
                 for jrk, taht in enumerate(sona):
@@ -97,13 +118,13 @@ def asetaLauale(sonastik, laud, asetatud):
                     if jrk == 0:
                         if len(wd[sona]) > 1:
                             if wd[sona][0].definition is None:
-                                asetatud[sona] = ((ridaIdx, veergIdx), '-', len(asetatud) + 1, 'wd[sona][0].definition')
+                                asetatud[sona] = ((ridaIdx, veergIdx), '-', len(asetatud) + 1, "'"+sona+"'")
                             else:
                                 asetatud[sona] = ((ridaIdx, veergIdx), '-', len(asetatud) + 1, wd[sona][0].definition)
                         else:
                             for i in wd[sona]:
                                 if i.definition is None:
-                                    asetatud[sona] = ((ridaIdx, veergIdx), '-', len(asetatud) + 1, 'i.definition')
+                                    asetatud[sona] = ((ridaIdx, veergIdx), '-', len(asetatud) + 1, "'"+sona+"'")
                                 else:
                                     asetatud[sona] = ((ridaIdx, veergIdx), '-', len(asetatud) + 1, i.definition)
 
@@ -124,7 +145,7 @@ def asetaLauale(sonastik, laud, asetatud):
                 break
 
             sona = random.choice(valikud)
-            while sona in asetatud:
+            while sona in asetatud and len(sona) >= len(veerg):
                 sona = random.choice(valikud)
             if len(sona) <= len(veerg):
                 for jrk, taht in enumerate(sona):
@@ -141,7 +162,6 @@ def asetaLauale(sonastik, laud, asetatud):
                                     asetatud[sona] = ((ridaIdx, veergIdx), '|', len(asetatud) + 1, 'i.definition')
                                 else:
                                     asetatud[sona] = ((ridaIdx, veergIdx), '|', len(asetatud) + 1, i.definition)
-
 
                     laud[ridaIdx][veergIdx] = taht
                     ridaIdx += 1
@@ -175,7 +195,7 @@ def asetaLauale(sonastik, laud, asetatud):
                 break
 
             sona = random.choice(valikud)
-            while sona in asetatud:
+            while sona in asetatud and len(sona) >= len(veerg):
                 sona = random.choice(valikud)
             if len(sona) <= len(veerg):
                 for jrk, taht in enumerate(sona):
@@ -184,11 +204,11 @@ def asetaLauale(sonastik, laud, asetatud):
                             if wd[sona][0].definition is None:
                                 asetatud[sona] = ((ridaIdx, veergIdx), '|', len(asetatud) + 1, 'wd[sona][0].definition')
                             else:
-                                asetatud[sona] = ((ridaIdx, veergIdx), '|', len(asetatud)+1, wd[sona][0].definition)
+                                asetatud[sona] = ((ridaIdx, veergIdx), '|', len(asetatud) + 1, wd[sona][0].definition)
                         else:
                             for i in wd[sona]:
                                 if i.definition is None:
-                                    asetatud[sona] = ((ridaIdx, veergIdx), '|', len(asetatud)+1, 'i.definition')
+                                    asetatud[sona] = ((ridaIdx, veergIdx), '|', len(asetatud) + 1, 'i.definition')
                                 else:
                                     asetatud[sona] = ((ridaIdx, veergIdx), '|', len(asetatud) + 1, i.definition)
 
@@ -199,18 +219,3 @@ def asetaLauale(sonastik, laud, asetatud):
         loendur += 2
         veergIdx += 2
         ridaIdx = 0
-
-andmestikuEeltöötleja = ae.AndmestikuEeltöötleja("https://www.cl.ut.ee/ressursid/sagedused/tabel1.txt")
-sagedus_sõnastik = andmestikuEeltöötleja.looDataFrame()
-andmestikuEeltöötleja.sorteeriDataFrame(sagedus_sõnastik)
-
-sagedus_sõnastik = sagedus_sõnastik.dropna()
-sonad = sagedus_sõnastik['sõna'].tolist()
-
-lahendus = dict()
-asetaLauale(sonad, LAUD, lahendus)
-
-for i in LAUD:
-    print(i)
-
-print(lahendus)

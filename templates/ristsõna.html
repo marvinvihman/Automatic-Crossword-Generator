@@ -14,9 +14,9 @@
         <a href="{{ url_for('leheküljest') }}">Leheküljest</a>
     </div>
 
-    <div class="main">
-        <h1>Ristõna</h1>
-    </div>
+
+    <h1 class="main">Ristõna</h1>
+    <a href="{{ url_for('ristsõna')}}">Genereeri uus ristsõna.</a>
 
     <div class="grid-container">
         <div>
@@ -37,14 +37,15 @@
         </div>
 
         <div class="crossword main">
-        <table>
+        <table id="content">
             {% for rida in laud %}
+
                 <tr>
                     {% for el in rida %}
-                        {% if el == '-' %}
+                        {% if el == '.' %}
                             <td><label class="input_label"></label></td>
                         {% else %}
-                            <td><input class="input" type="string" size="1" value="{{ el }}"></td>
+                            <td><input class="input" type="string" size="2" value="{{ el }}"></td>
                         {% endif %}
                     {% endfor %}
                 </tr>
@@ -55,13 +56,14 @@
     </div>
     </div>
 
-    <div class="crossword main">
-        {% for rida in laud %}
-            {{ rida }}
-            <br>
-        {% endfor %}
+    <div class="main">
+        <h1>Lahendus</h1>
 
+        {% for lahend in sõnastik %}
+            {{ sõnastik.get(lahend)[2] }}. {{ lahend }}
+        {% endfor %}
     </div>
+
 
 </body>
 </html>

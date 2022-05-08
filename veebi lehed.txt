@@ -1,0 +1,2 @@
+https://estwn.keeleressursid.ee/api/schema/swagger-ui/#/
+https://stackoverflow.com/questions/40963401/flask-dynamic-data-update-without-reload-page/40964086

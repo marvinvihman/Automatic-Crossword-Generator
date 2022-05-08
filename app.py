@@ -1,17 +1,14 @@
-from flask import Flask, render_template, url_for
-import andmestikuEeltöötleja as ae
-import estnltk
-from estnltk.wordnet import Wordnet
+from flask import Flask, render_template, url_for, Table, Col
+import ristsõna as rs
 
-andmestikuEeltöötleja = ae.AndmestikuEeltöötleja("https://www.cl.ut.ee/ressursid/sagedused/tabel1.txt")
-sagedus_sõnastik = andmestikuEeltöötleja.looDataFrame()
-andmestikuEeltöötleja.sorteeriDataFrame(sagedus_sõnastik)
 
 app = Flask(__name__)
+
 
 @app.route('/')
 def kodu():
     return render_template('kodu.html')
+
 
 @app.route("/leheküljest")
 def leheküljest():
@@ -20,7 +17,9 @@ def leheküljest():
 
 @app.route("/ristsõna")
 def ristsõna():
-    return render_template('ristsõna.html')
+
+    return render_template('ristsõna.html', sõnastik=rs.lahendus, laud=rs.LAUD)
+
 
 if __name__ == '__main__':
     app.run()

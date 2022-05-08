@@ -22,6 +22,9 @@ class AndmestikuEeltöötleja:
     def sorteeriDataFrame(self, dataFrame):
         dataFrame.sort_values(by="kokku", ascending=False, inplace=True)
 
+        dataFrame['id'] = [i for i in range(len(dataFrame))]
+        dataFrame.set_index('id', inplace=True)
+
         return dataFrame
 
     def tagastaLühendiNimetus(self, lühend):

@@ -3,22 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="../static/css/main.css">
+    <link rel="stylesheet" href="../static/css/print.css">
     <script type="text/javascript" src="../static/js/javascript.js"></script>
-    <title>Ristsõna Programm</title>
+    <title>Ristsõna Genereerija</title>
 </head>
-<body>
+<body id="body">
 
     <div class="navbar">
         <a href="{{ url_for('kodu') }}" >Kodulehekülg</a>
         <a href="{{ url_for('ristsõna') }}">Ristsõna</a>
         <a href="{{ url_for('leheküljest') }}">Leheküljest</a>
+        <a href="{{ url_for('ristsõna')}}">Genereeri uus ristsõna.</a>
     </div>
 
 
-    <h1 class="main">Ristõna</h1>
-    <a href="{{ url_for('ristsõna')}}">Genereeri uus ristsõna.</a>
+    <h1 id="print0" class="main print">Ristõna</h1>
 
-    <div class="grid-container">
+    <button onclick="printScreen()">Prindi leht.</button>
+
+    <div id="print1" class="grid-container">
         <div>
             <h3>Paremale:</h3>
             {% for key in sõnastik %}
@@ -37,7 +40,7 @@
         </div>
 
         <div class="crossword main">
-        <table id="content">
+        <table>
             {% for rida in laud %}
 
                 <tr>
@@ -45,7 +48,7 @@
                         {% if el == '.' %}
                             <td><label class="input_label"></label></td>
                         {% else %}
-                            <td><input class="input" type="string" size="2" value="{{ el }}"></td>
+                            <td><input class="input" type="text" value="{{ el }}"></td>
                         {% endif %}
                     {% endfor %}
                 </tr>
@@ -56,7 +59,7 @@
     </div>
     </div>
 
-    <div class="main">
+    <div id="print2" class="main">
         <h1>Lahendus</h1>
 
         {% for lahend in sõnastik %}

@@ -153,13 +153,13 @@ def asetaLauale(sonastik, laud, asetatud, wd):
                     if jrk == 0:
                         if len(wd[sona]) > 1:
                             if wd[sona][0].definition is None:
-                                asetatud[sona] = ((ridaIdx, veergIdx), '|', len(asetatud) + 1, 'wd[sona][0].definition')
+                                asetatud[sona] = ((ridaIdx, veergIdx), '|', len(asetatud) + 1, "'" + sona + "'")
                             else:
                                 asetatud[sona] = ((ridaIdx, veergIdx), '|', len(asetatud) + 1, wd[sona][0].definition)
                         else:
                             for i in wd[sona]:
                                 if i.definition is None:
-                                    asetatud[sona] = ((ridaIdx, veergIdx), '|', len(asetatud) + 1, 'i.definition')
+                                    asetatud[sona] = ((ridaIdx, veergIdx), '|', len(asetatud) + 1, "'" + sona + "'")
                                 else:
                                     asetatud[sona] = ((ridaIdx, veergIdx), '|', len(asetatud) + 1, i.definition)
 
@@ -202,13 +202,13 @@ def asetaLauale(sonastik, laud, asetatud, wd):
                     if jrk == 0:
                         if len(wd[sona]) > 1:
                             if wd[sona][0].definition is None:
-                                asetatud[sona] = ((ridaIdx, veergIdx), '|', len(asetatud) + 1, 'wd[sona][0].definition')
+                                asetatud[sona] = ((ridaIdx, veergIdx), '|', len(asetatud) + 1, "'" + sona + "'")
                             else:
                                 asetatud[sona] = ((ridaIdx, veergIdx), '|', len(asetatud) + 1, wd[sona][0].definition)
                         else:
                             for i in wd[sona]:
                                 if i.definition is None:
-                                    asetatud[sona] = ((ridaIdx, veergIdx), '|', len(asetatud) + 1, 'i.definition')
+                                    asetatud[sona] = ((ridaIdx, veergIdx), '|', len(asetatud) + 1, "'" + sona + "'")
                                 else:
                                     asetatud[sona] = ((ridaIdx, veergIdx), '|', len(asetatud) + 1, i.definition)
 

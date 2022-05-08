@@ -4,6 +4,9 @@ import re
 from estnltk.wordnet import Wordnet
 
 
+#########
+# Põhi funktsioon, mida käivitades tagastatakse ruudustik ehk laud ja sõnastik ehk lahenduse sõnad.
+#########
 def toota():
     wd = Wordnet()
 
@@ -21,11 +24,6 @@ def toota():
     lahend = dict()
     asetaLauale(sonad, LAUD, lahend, wd)
 
-    for i in LAUD:
-        print(i)
-
-    print(lahend)
-
     for i in range(len(LAUD)):
         for j in range(len(LAUD)):
             if LAUD[i][j] != '.':
@@ -40,6 +38,7 @@ def toota():
     return lahend, LAUD
 
 
+# Funktsioon, mis tagastab võimalikud sõnad, mis sobiksid veergu või ritta.
 def leiaValikud(reg, sonastik):
     loendur = 0
     cutoff = 0
@@ -82,6 +81,7 @@ def leiaValikud(reg, sonastik):
     return []
 
 
+# Funktsioon, mis genereerib ristsõna.
 def asetaLauale(sonastik, laud, asetatud, wd):
     ridaIdx = 0
     veergIdx = 0
@@ -118,13 +118,13 @@ def asetaLauale(sonastik, laud, asetatud, wd):
                     if jrk == 0:
                         if len(wd[sona]) > 1:
                             if wd[sona][0].definition is None:
-                                asetatud[sona] = ((ridaIdx, veergIdx), '-', len(asetatud) + 1, "'"+sona+"'")
+                                asetatud[sona] = ((ridaIdx, veergIdx), '-', len(asetatud) + 1, "'" + sona + "'")
                             else:
                                 asetatud[sona] = ((ridaIdx, veergIdx), '-', len(asetatud) + 1, wd[sona][0].definition)
                         else:
                             for i in wd[sona]:
                                 if i.definition is None:
-                                    asetatud[sona] = ((ridaIdx, veergIdx), '-', len(asetatud) + 1, "'"+sona+"'")
+                                    asetatud[sona] = ((ridaIdx, veergIdx), '-', len(asetatud) + 1, "'" + sona + "'")
                                 else:
                                     asetatud[sona] = ((ridaIdx, veergIdx), '-', len(asetatud) + 1, i.definition)
 

@@ -13,9 +13,48 @@
         <a href="{{ url_for('ristsõna') }}">Ristsõna</a>
         <a href="{{ url_for('leheküljest') }}">Leheküljest</a>
     </div>
-    <div class="main">
-        <h1>Tegu on automaatse ristsõna genereerijaga, mis valmis bakalaureuse lõputööna</h1>
-        <p>Alustame siis !</p>
+    <div>
+        <h1 class="main">Tegu on automaatse ristsõna genereerijaga, mis valmis bakalaureuse lõputööna</h1>
+
+        <h3 class="main">Automatic Crossword Generator</h3>
+        <p>My bachelor's thesis.</p>
+        <p>The program's algorithm for making crosswords is a little funky right now, for some reason it sometimes
+overwrites words, that have already been added to the table.
+Current problems also include some words missing definitions in the Estonian Wordnet.</p>
+        <p>This project can only run on Python versions 3.7-3.9, because EstNLTK supports only those currently.</p>
+        <p>To run the program locally, it needs to have EstNLTK, Flask and Pandas installed. For easier use, it's
+recommended to download and install <a href="https://www.anaconda.com/distribution/">Anaconda</a>,
+and for less disk usage <a href="https://conda.io/en/latest/miniconda.html">Miniconda</a> can also be installed.</p>
+        <p>Using Anaconda or Miniconda GUI version or the Anaconda (Powershell) Prompt, do the next steps.</p>
+
+        <p class="main" style="background-color: #9a989c">conda create -n env_name python=3.9</p>
+        <p class="main" style="background-color: #9a989c">conda activate env_name</p>
+        <p>Now when virtual env has been created, then you can install the needed moduls.</p>
+        <p class="main" style="background-color: #9a989c">conda install -c estnltk -c conda-forge estnltk</p>
+        <p class="main" style="background-color: #9a989c">pip install flask</p>
+        <p class="main" style="background-color: #9a989c">pip install pandas</p>
+        <p>This project has many ways, that it can be improved upon, and those will be kept for the future.</p>
+
+    </div>
+
+    <div>
+        <h3 class="main">Automaatne ristsõna genereerija</h3>
+        <p>Tegu on minu bakalaureuse tööga.</p>
+        <p>Programmi algoritm hetkel ei tööta korrektselt ning selles on vead sees, vahest kirjutades üle lauale juba lisatud sõnasid.
+            Lisaks on <i>Estonian Wordnet</i>'ist mõnede sõnade definitsioonid puudu, mille tõttu hetkel läheb vihjeks sõna ise.</p>
+        <p>See projekt töötab hetkeseisuga ainult Python versioonide 3.7-3.9'ga, sest EstNLTK toetab ainult neid, mitte uuemat.</p>
+        <p>Käivitada programmi lokaalselt oma arvutis on vaja eraldi mooduleid alla laadida, milleks on EstNLTK, Flask ja Pandas. Lihtsamaks kasutamiseks on soovituslik
+            alla laadida <a href="https://www.anaconda.com/distribution/">Anaconda</a>, vähesema ruumi kasutamiseks on võimalik ka
+            <a href="https://conda.io/en/latest/miniconda.html">Miniconda</a> alla laadida.</p>
+        <p>Kasutades Anaconda või Miniconda GUI'd, sobib ka <i>Anaconda (Powershell) Prompt</i>, tee järgmised sammud.</p>
+
+        <p class="main" style="background-color: #9a989c">conda create -n env_name python=3.9</p>
+        <p class="main" style="background-color: #9a989c">conda activate env_name</p>
+        <p>Now when virtual env has been created, then you can install the needed moduls.</p>
+        <p class="main" style="background-color: #9a989c">conda install -c estnltk -c conda-forge estnltk</p>
+        <p class="main" style="background-color: #9a989c">pip install flask</p>
+        <p class="main" style="background-color: #9a989c">pip install pandas</p>
+        <p>Projektil on mitmeid viise, kuidas seda arendada saaks, kuid see on tulevikuks.</p>
     </div>
 
 </body>

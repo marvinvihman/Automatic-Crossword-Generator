@@ -24,18 +24,27 @@ def toota():
     lahend = dict()
     asetaLauale(sonad, LAUD, lahend, wd)
 
+    laud = [rida.copy() for rida in LAUD]
+
     for i in range(len(LAUD)):
         for j in range(len(LAUD)):
             if LAUD[i][j] != '.':
-                LAUD[i][j] = ''
+                laud[i][j] = ''
 
     for value in lahend.values():
-        if LAUD[value[0][0]][value[0][1]] == '':
-            LAUD[value[0][0]][value[0][1]] += str(value[2])
+        if laud[value[0][0]][value[0][1]] == '':
+            laud[value[0][0]][value[0][1]] += str(value[2])
+            LAUD[value[0][0]][value[0][1]] = str(value[2]) + " " + LAUD[value[0][0]][value[0][1]]
         else:
-            LAUD[value[0][0]][value[0][1]] += ', ' + str(value[2])
+            laud[value[0][0]][value[0][1]] += ', ' + str(value[2])
+            LAUD[value[0][0]][value[0][1]] = str(value[2]) + ", " + LAUD[value[0][0]][value[0][1]]
 
-    return lahend, LAUD
+    for i in laud:
+        print(i)
+    for i in LAUD:
+        print(i)
+
+    return lahend, LAUD, laud
 
 
 # Funktsioon, mis tagastab võimalikud sõnad, mis sobiksid veergu või ritta.

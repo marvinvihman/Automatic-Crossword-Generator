@@ -16,8 +16,8 @@ def leheküljest():
 
 @app.route("/ristsõna")
 def ristsõna():
-    sonastik, laud = rs.toota()
-    return render_template('ristsõna.html', sõnastik=sonastik, laud=laud)
+    sonastik, lahendus, laud = rs.toota()
+    return render_template('ristsõna.html', sõnastik=sonastik, laud=laud, lahendus=lahendus)
 
 
 if __name__ == '__main__':

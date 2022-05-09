@@ -14,14 +14,13 @@
         <a href="{{ url_for('ristsõna') }}">Ristsõna</a>
         <a href="{{ url_for('leheküljest') }}">Leheküljest</a>
         <a href="{{ url_for('ristsõna')}}">Genereeri uus ristsõna.</a>
+        <a onclick="printScreen()">Prindi leht</a>
     </div>
 
 
     <h1 id="print0" class="main print">Ristõna</h1>
 
-    <button onclick="printScreen()">Prindi leht.</button>
-
-    <div id="print1" class="grid-container">
+    <div id="print1" class="grid-container" style="padding-left: 20%">
         <div>
             <h3>Paremale:</h3>
             {% for key in sõnastik %}
@@ -48,7 +47,7 @@
                         {% if el == '.' %}
                             <td><label class="input_label"></label></td>
                         {% else %}
-                            <td><input class="input" type="text" value="{{ el }}"></td>
+                            <td><b><input class="input" type="text" value="{{ el }}"</b></td>
                         {% endif %}
                     {% endfor %}
                 </tr>
@@ -65,6 +64,21 @@
         {% for lahend in sõnastik %}
             {{ sõnastik.get(lahend)[2] }}. {{ lahend }}
         {% endfor %}
+
+        <table style="padding-left: 32%">
+            {% for rida in lahendus %}
+
+                <tr>
+                    {% for el in rida %}
+                        {% if el == '.' %}
+                            <td><label class="input_label"></label></td>
+                        {% else %}
+                            <td><input class="input" type="text" value="{{ el }}"></td>
+                        {% endif %}
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </table>
     </div>
 
 

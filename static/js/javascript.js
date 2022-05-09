@@ -18,6 +18,7 @@ function printScreen() {
     body.style.visibility = "hidden";
     el0.classList.add("print");
     el1.classList.add("print");
+    el1.style.paddingLeft = "0%";
     el2.classList.add("print");
 
     window.print();
@@ -25,5 +26,7 @@ function printScreen() {
     body.style.visibility = "";
     el0.classList.remove("print");
     el1.classList.remove("print");
+    el1.style.paddingLeft = "20%";
     el2.classList.remove("print");
+
 }

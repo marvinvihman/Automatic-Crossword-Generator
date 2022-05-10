@@ -1,5 +1,5 @@
 # Automatic-Crossword-Generator
-My bachelor's thesis.
+Marvin Vihman's bachelor's thesis "Automatic crossword generator" (University of Tartu, 2022).
 
 The program's algorithm for making crosswords is a little funky right now, for some reason it sometimes 
 overwrites words, that have already been added to the table.
@@ -7,6 +7,7 @@ Current problems also include some words missing definitions in the Estonian Wor
 
 This project can only run on Python versions 3.7-3.9, because EstNLTK supports only those currently.
 
+To use it on the web, use the given link [https://ristsona-genereerija.herokuapp.com/](https://ristsona-genereerija.herokuapp.com)
 
 To run the program locally, it needs to have EstNLTK, Flask and Pandas installed. For easier use, it's 
 recommended to download and install Anaconda (https://www.anaconda.com/distribution/), 
